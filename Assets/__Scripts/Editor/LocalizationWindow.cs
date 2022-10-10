@@ -101,6 +101,12 @@ public class LocalizationWindow : EditorWindow
             }
             GUILayout.EndHorizontal();
         }
+        EditorGUILayout.Space();
+
+        if (GUILayout.Button("Refresh Translations"))
+        {
+            RefreshTranslations();
+        }
     }
 
     void LoadKeys()
@@ -215,6 +221,11 @@ public class LocalizationWindow : EditorWindow
         }
 
         languageSwap = "";
+        LanguagesManager.translationsChanged = true;
+    }
+
+    void RefreshTranslations()
+    {
         LanguagesManager.translationsChanged = true;
     }
 }
