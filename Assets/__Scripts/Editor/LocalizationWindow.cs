@@ -152,6 +152,7 @@ public class LocalizationWindow : EditorWindow
         }
 
         keyToAdd = "";
+        LanguagesManager.translationsChanged = true;
     }
 
     void RemoveKey()
@@ -169,6 +170,7 @@ public class LocalizationWindow : EditorWindow
         }
 
         keyToRemove = "";
+        LanguagesManager.translationsChanged = true;
     }
 
     void AddLanguage()
@@ -185,6 +187,7 @@ public class LocalizationWindow : EditorWindow
         }
 
         languageToAdd = "";
+        LanguagesManager.translationsChanged = true;
     }
 
     void RemoveLanguage()
@@ -200,6 +203,7 @@ public class LocalizationWindow : EditorWindow
         }
 
         langaugeToRemove = "";
+        LanguagesManager.translationsChanged = true;
     }
 
     void SetActiveLanguage()
@@ -211,5 +215,6 @@ public class LocalizationWindow : EditorWindow
         }
 
         languageSwap = "";
+        LanguagesManager.translationsChanged = true;
     }
 }
