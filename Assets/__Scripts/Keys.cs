@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-public class LanguagesEditor : Editor
+public class Keys : ScriptableObject
 {
-    
+    public List<string> keys;
 }

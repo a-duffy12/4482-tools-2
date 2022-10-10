@@ -1,82 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System.IO;
 
 [System.Serializable]
 public class LanguagesManager : MonoBehaviour
 {
-    static List<string> keys;
+    public static string activeLanguage;
 
-    // Start is called before the first frame update
+    Keys keys;
+    Language language;
+    Dictionary<string, string> activeTranslations;
+
     void Start()
     {
-        
+        GetSavedData();
+
+        //LoadActiveTranslations();
     }
 
-    // Update is called once per frame
-    void Update()
+    /*void LoadActiveTranslations()
     {
-        
-    }
-
-    public List<string> GetKeys()
-    {
-        return new List<string>(Languages.translations["english"].Keys);
-    }
-
-    public void AddLanguage(string language, Dictionary<string, string> keyEntries)
-    {
-        if (Languages.translations.ContainsKey(language))
+        if (!Directory.Exists("Assets/Keys"))
         {
-            return;
-        }
-        Languages.translations.Add(language, keyEntries);
-    }
-
-    public void ModifyLanguage(string language, Dictionary<string, string> keyEntries)
-    {
-        if (!Languages.translations.ContainsKey(language))
-        {
-            return;
+            Debug.Log("No keys present!");
         }
 
-        Languages.translations[language] = keyEntries;
-    }
+        string keysAssetName = AssetDatabase.FindAssets("Keys");
+        var keysPath = AssetDatabase.GUIDToAssetPath(keysAssetName);
+        keys = AssetDatabase.LoadAssetAtPath<Language>(keysPath);
 
-    public void RemoveLanguage(string language)
-    {
-        if (!Languages.translations.ContainsKey(language))
+        if (!Directory.Exists("Assets/Languages"))
         {
-            return;
+            Debug.Log("No languages present!");
         }
-        Languages.translations.Remove(language);
-    }
 
-    public void AddKey(string key, Dictionary<string, string> languageEntries) // takes in a key and a dictionary of language - translation pairs
-    { 
-        foreach (var language in Languages.translations)
+        string languageAssetName = AssetDatabase.FindAssets(activeLanguage);
+        var languagePath = AssetDatabase.GUIDToAssetPath(languageAssetName);
+        language = AssetDatabase.LoadAssetAtPath<Language>(languagePath);
+
+        for (int i = 0; i < keys.keys.Count(); i++)
         {
-            language.Value.Add(key, languageEntries[language.Key]); // add key and string
+            activeTranslations.Add(keys.keys[i], language.translations[i]);
         }
-    }
+    }*/
 
-    public void ModifyKey(string key, Dictionary<string, string> languageEntries) // takes in a key and a dictionary of language - translation pairs
+    void GetSavedData()
     {
-        foreach (var language in Languages.translations)
+        GameData savedData = SaveLoad.LoadData();
+
+        if (savedData != null)
         {
-            language.Value[key] = languageEntries[language.Key];
+            LanguagesManager.activeLanguage = savedData.activeLanguage;
         }
-    }
-
-    public void RemoveKey(string key)
-    {
-        foreach (var language in Languages.translations)
-        {
-            if (!language.Value.ContainsKey(key))
-            {
-                continue;
-            }
-            language.Value.Remove(key);
-        }   
     }
 }

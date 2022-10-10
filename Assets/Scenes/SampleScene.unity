@@ -241,6 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c219e4061eed3d2429bda46da44b1e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  languages:
+  - {fileID: 11400000, guid: eb3637762a5182f4b893a2bde492af63, type: 2}
+  - {fileID: 11400000, guid: c0d707b0877b61b4fa7db9c05e692a50, type: 2}
   playText: {fileID: 1593190790}
   optionsText: {fileID: 864526444}
   quitText: {fileID: 190588723}
